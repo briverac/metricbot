@@ -1,6 +1,9 @@
 require 'HTTParty'
 
 class MetricService
+
+  CREDENTIALS_YAML_PATH = 'config/credentials.yml'
+
   attr_reader :url
   attr_reader :metric_id
   attr_reader :location
@@ -12,7 +15,7 @@ class MetricService
     @metric_id = metric_id
     @compute_period = compute_period
     @location = location
-    @yml = YAML.load_file('credentials.yml')
+    @yml = YAML.load_file(CREDENTIALS_YAML_PATH)
   end
 
   def response
@@ -38,7 +41,7 @@ class MetricService
   end
 
   def metric_row(metric)
-    "start_date: #{metric["start_date"]} end_date: #{metric["end_date"]} score: #{metric["score"]}"
+    "start_date: `#{metric["start_date"]}` end_date: `#{metric["end_date"]}` score: `#{metric["score"]}`"
   end
 
 end
