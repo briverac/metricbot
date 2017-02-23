@@ -1,6 +1,6 @@
 require 'HTTParty'
 
-class Metric
+class MetricService
   attr_reader :url
   attr_reader :metric_id
   attr_reader :location
