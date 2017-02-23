@@ -5,16 +5,18 @@ class MetricService
   attr_reader :metric_id
   attr_reader :location
   attr_reader :compute_period
+  attr_reader :yml
 
   def initialize(url, metric_id, compute_period, location)
     @url = url
     @metric_id = metric_id
     @compute_period = compute_period
     @location = location
+    @yml = YAML.load_file('credentials.yml')
   end
 
   def response
-    HTTParty.get(request, headers: headers)
+    human_response(HTTParty.get(request, headers: headers))
   end
 
   private
@@ -25,10 +27,18 @@ class MetricService
 
   def headers
     {
-      'Content-Type' => 'application/json',
-      'Authorization' => 'Basic VVNFUk5BTUUxOnBhc3N3b3Jk',
-      'X-API-KEY' => '9a3d7cc7806c4390e07399d362c6a04a491c5cc5ad27a16aa1f22b678b92888d'
+      'Content-Type' => yml['content_type'],
+      'Authorization' => yml['authorization'],
+      'X-API-KEY' => yml['x_api_key']
     }
+  end
+
+  def human_response(response)
+    response.map { |metric| metric_row(metric) }
+  end
+
+  def metric_row(metric)
+    "start_date: #{metric["start_date"]} end_date: #{metric["end_date"]} score: #{metric["score"]}"
   end
 
 end
