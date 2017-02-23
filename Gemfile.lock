@@ -1,12 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (5.0.0.1)
+    activesupport (5.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
@@ -28,48 +29,52 @@ GEM
       timers (>= 4.1.1)
     celluloid-supervision (0.20.6)
       timers (>= 4.1.1)
-    concurrent-ruby (1.0.2)
-    faraday (0.9.2)
+    concurrent-ruby (1.0.4)
+    faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.2)
-      faraday (>= 0.7.4, < 0.10)
-    faraday_middleware-parse_oj (0.3.0)
-      faraday (~> 0.9.0)
-      faraday_middleware (~> 0.9.1)
+    faraday_middleware (0.11.0.1)
+      faraday (>= 0.7.4, < 1.0)
+    faraday_middleware-parse_oj (0.3.1)
+      faraday (~> 0.9)
+      faraday_middleware (>= 0.9.1, < 1.0)
       oj (~> 2.0)
     giphy (3.0.0)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
       faraday_middleware-parse_oj (~> 0.3)
       launchy (~> 2.4)
-    gli (2.14.0)
-    hashie (3.4.6)
+    gli (2.15.0)
+    hashie (3.5.4)
     hitimes (1.2.4)
-    i18n (0.7.0)
-    json (2.0.2)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
+    i18n (0.8.1)
+    json (2.0.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    minitest (5.9.1)
+    minitest (5.10.1)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
-    nio4r (1.2.1)
-    oj (2.17.5)
-    slack-ruby-bot (0.9.0)
+    nio4r (2.0.0)
+    oj (2.18.1)
+    public_suffix (2.0.5)
+    slack-ruby-bot (0.10.1)
       hashie
       slack-ruby-client (>= 0.6.0)
-    slack-ruby-client (0.7.7)
+    slack-ruby-client (0.7.9)
       activesupport
-      faraday
+      faraday (>= 0.9)
       faraday_middleware
       gli
       hashie
       json
       websocket-driver
-    thread_safe (0.3.5)
-    timers (4.1.1)
+    thread_safe (0.3.6)
+    timers (4.1.2)
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    websocket-driver (0.6.4)
+    websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
 
@@ -79,6 +84,7 @@ PLATFORMS
 DEPENDENCIES
   celluloid-io
   giphy
+  httparty
   slack-ruby-bot
 
 BUNDLED WITH
