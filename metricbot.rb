@@ -5,11 +5,19 @@ class MetricBot < SlackRubyBot::Bot
 
   help do
     title 'MetricBot'
-    desc 'Do funny stuff'
+    desc 'Gets the scores of a metric from a specific location, based on a compute_period'
 
     command 'get_server' do
-      desc 'Set the url of the server that will be hit'
-      long_desc 'Get the user input and set it as the url of the server that will be hit'
+      desc 'Shows the url of the server that will be hit'
+      long_desc 'Shows the url of the server that will be hit, if there is not set an url, it will show an error message. Usage: `get_server`'
+    end
+    command 'set_server' do
+      desc 'Sets the url of the server that will be hit'
+      long_desc 'Gets the user input and sets it as the url of the server that will be hit. Usage: `set_server http://url.com`'
+    end
+    command 'metric' do
+      desc 'Lists the scores of the metric based on the metric, the compute_period, and the location'
+      long_desc 'This is the usage: `metric metric_id compute_period location`. You must enter all the values'
     end
   end
 
@@ -30,7 +38,7 @@ class MetricBot < SlackRubyBot::Bot
     return client.say(text: 'Please first set the server', channel: data.channel) unless @server
     params = match[:expression].split(' ')
     if params.size != 3
-      client.say(text: 'You must enter the metric_id, the computed_period and the location', channel: data.channel)
+      client.say(text: "Usage: 'metric metric_id compute_period location'", channel: data.channel)
     else
       metric = MetricService.new(@server, params[0], params[1], params[2])
       client.say(text: metric.response, channel: data.channel)
