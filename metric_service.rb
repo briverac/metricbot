@@ -37,7 +37,14 @@ class MetricService
   end
 
   def human_response(response)
-    response.map { |metric| metric_row(metric) }
+    case response.code.to_i
+    when 200
+      response.map { |metric| metric_row(metric) }
+    when 404
+      'Sorry there is no data'
+    when 500...600
+      'Something went wrong, try again later'
+    end
   end
 
   def metric_row(metric)
